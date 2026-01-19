@@ -32,6 +32,23 @@ When an object is created or **new** in C++, the system finds memory in the heap
 ### The Stack
 Operates by LIFO. When a function is called, the CPU moves the Stack Pointer and creates a new stack frame. This frame holds the function's local variables, arguments and return address. Once finished, the pointer moves back.
 
+## Sorting Algorithms
+
+Sorting is the process or arranging data into a specific order, typically numerical or alphabetical. It is the foundation of data efficiency.
+
+It is normally used as a preprocessing tool that makes other tasks faster.
+
+* Optimized Searching: Algorithms like **Binary Search** cannot be performed on unsorted data.
+* Identifying Relationships: Sorting brings identical or related data points together.
+
+There exist different sorting algorithms and they are useful on different scenarios.
+
+### Quick Sort
+It uses a pivot element to partition an array in two halves, to the left elements smaller thant the pivot and to the right, elements larger than the pivot. Then does this recursively until the array is sorted.
+
+* It provides a speed of O(nlogn)
+* It has low Spatial Complexity, therefore it is useful in scenarios where memory is limited.
+
 
 ## Data Structures
 
@@ -40,6 +57,27 @@ A **Set** in Python is architecturally identical to a **Dictionary** that contai
 * Both utilize a **Hash Table** for storage.
 * Both provide **O(1) average time complexity** for lookups, insertions, and deletions.
 * Sets are more memory-efficient when you only need to track the existence of unique items.
+
+### Trees
+
+Hierarchical structure in which each node has a value and pointers to **"children"**. 
+
+
+* It can point to **multiple** other nodes (unlike linked list).
+* A tree cannot go backwards, starts at root and keeps on expanding.
+
+
+```python
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+``` 
+
+ 
+
+
 
 
 
