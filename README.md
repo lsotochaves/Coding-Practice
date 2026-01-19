@@ -115,14 +115,13 @@ class TreeNode:
 #### Terminology
 
 * **Edge**: Link between two nodes.
-* **Leaf**:: Node that has no children.
+* **Leaf**: Node that has no children.
 * **Height**: Length of the longest path between a **node** and a **leaf**.
 * **Depth**: Length of the path from **root** to specific **node**.
 
-### Binary Tree
+#### Binary Tree
 
 Each node can have a **maximum** of two children (left child and right child).
-
 ```python
 class BinaryTreeNode:
     def __init__(self, value):
@@ -131,23 +130,60 @@ class BinaryTreeNode:
         self.right = None
 ```
 
-#### Binary Search Tree (BST)
+##### Binary Search Tree (BST)
 
-In a binary tree the **left node contains values less than the parent's value** while the **right node contains values higher than the parent's value**.
+In a binary search tree, the **left subtree contains values less than the parent's value** while the **right subtree contains values greater than the parent's value**.
 
-#### Utility
+###### Utility
 
 The utility of a BST comes from it being **balanced**. If numbers are inserted in order [1, 2, 3, 4, ...] the tree will be a straight line going to the right. That is a **degenerate tree**. In this state it becomes as slow as a linked list.
 
-A **balanced tree** means the height of the left and right subtrees of every node differs by no more than one. To fix this **self-balancing** is used, in which if new data comes in, if one side becomes loaded the tree performs a rotation (pointers are re-arrangement of its pointers). A **strictly balanced** tree is **faster** at searching data but **slower** at adding it or deleting it while a **Red-Black Tree** is more loose, hence **slower at searching but faster at inserting/deleting**.
+A **balanced tree** means the height of the left and right subtrees of every node differs by no more than one. To fix this, **self-balancing** is used, in which if new data comes in and one side becomes loaded, the tree performs a rotation (rearrangement of its pointers). An **AVL tree** (strictly balanced) is **faster** at searching data but **slower** at adding or deleting it, while a **Red-Black Tree** is more loosely balanced, hence **slower at searching but faster at inserting/deleting**.
 
-In most applications it seems like it is O(log n), **search later**.
+For a balanced BST, operations are O(log n). For a degenerate tree, operations degrade to O(n).
 
 * **Searching items**: If a certain number is being searched, half of the data can be easily discarded in each pass. 
 * **Maintaining sorted data**: In an array, if a number must be inserted and the array must be ordered, every single element needs to be shifted. In a BST, the tree is traversed until a **leaf** is found and the data is added there.
-* **Efficient range queries**: Imagine all values between an specified range (50k-70k), only the nodes that fall between these range are analyzed (no need to analyze every single node).
+* **Efficient range queries**: Imagine all values between a specified range (50k-70k), only the nodes that fall between this range are analyzed (no need to analyze every single node).
 
+###### Cost of building a BST
 
+The use of a BST **must** be justified by the problem the programmer is trying to solve. Building a tree is expensive, but in the long run it can be more efficient than checking a list over and over again.
+
+Building a BST takes O(n log n) on average when inserting n elements one by one.
+
+#### Heap
+
+It is a tree, however it is almost always implemented as a list/array.
+
+There are **max-heap** in which the parent is always bigger than its children (root node is the largest element) and **min-heap**, where the parent is smaller than its children and the root is the smallest element.
+
+A heap must be **complete**, which means that all levels are fully filled except possibly the last level, which is filled from left to right. Because of this, a heap can be mapped into an array in which each **element** can be accessed this way:
+
+* Left Child = 2i + 1
+
+* Right Child = 2i + 2
+
+* Parent = (i - 1) // 2     
+
+##### Insertion
+
+It adds a new element at the **end of the array** (next available position), compares it with its parent, if it violates the heap property they are swapped and repeat until the property is restored. This is called **bubble-up** or **heapify-up**. It has a complexity of O(log n).
+
+##### Deletion (Extract-Min/Max)
+
+The root is removed (min or max), the last element replaces the root, then it's compared with its children and swapped with the smaller child (min-heap) or larger child (max-heap) until the heap property is restored. This is called **bubble-down** or **heapify-down**. It has a complexity of O(log n).
+
+##### Cost of building a Heap
+
+Building a heap from a random list takes O(n) using the **heapify** algorithm (bottom-up construction). 
+
+##### Utility
+
+* **Priority Queues**: Handling the most urgent tasks that need to happen next.
+* **Heapsort**: Sorting a list in O(n log n) with O(1) extra space.
+* **K-largest/smallest element**: Finding the top or bottom k elements in a stream of data.
+* **Median finding**: Using two heaps (max-heap and min-heap) to efficiently track the median in a data stream.
 
 
 
