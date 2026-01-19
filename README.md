@@ -96,7 +96,7 @@ It is normally used as a preprocessing tool that makes other tasks faster.
 * Optimized Searching: Algorithms like **Binary Search** cannot be performed on unsorted data.
 * Identifying Relationships: Sorting brings identical or related data points together.
 
-There exist different sorting algorithms and they are useful on different scenarios.
+There exist different sorting algorithms and they are useful on different scenarios. And in practice, most libraries use a combination of algorithms to get the best of different implementations.
 
 ### Quick Sort
 It uses a pivot element to partition an array in two halves, to the left elements smaller thant the pivot and to the right, elements larger than the pivot. Then does this recursively until the array is sorted.
