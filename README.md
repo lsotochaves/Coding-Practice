@@ -190,45 +190,60 @@ Building a heap from a random list takes O(n) using the **heapify** algorithm (b
 
 ## Sorting Algorithms
 
-Sorting is the process or arranging data into a specific order, typically numerical or alphabetical. It is the foundation of data efficiency.
+### Sorting Algorithms
 
-It is normally used as a preprocessing tool that makes other tasks faster.
+Sorting is the process of arranging data into a specific order, typically numerical or alphabetical. It is the foundation of data efficiency and is often used as a preprocessing step to make other tasks (like Binary Search) possible.
 
-* Optimized Searching: Algorithms like **Binary Search** cannot be performed on unsorted data.
-* Identifying Relationships: Sorting brings identical or related data points together.
+#### O(n²) - Quadratic Sorts (Simple but Inefficient)
 
-There exist different sorting algorithms and they are useful on different scenarios. And in practice, most libraries use a combination of algorithms to get the best of different implementations.
+##### Bubble Sort
+Works by repeatedly stepping through the list, comparing adjacent elements and swapping them if they are in the wrong order. This repeats until the list is sorted.
+* **Utility**: Primarily educational; it is rarely used in production because it is slow.
+* **Best Case**: $O(n)$ if the list is already sorted.
+* **Worst Case**: $O(n^2)$.
 
-### Quick Sort
-It uses a pivot element to partition an array in two halves, to the left elements smaller thant the pivot and to the right, elements larger than the pivot. Then does this recursively until the array is sorted.
+##### Insertion Sort
+Builds the final sorted array one item at a time by "inserting" each new element into its correct position among the previously sorted elements.
+* **Utility**: Extremely efficient for **small datasets** (usually $n < 50$) or lists that are **already nearly sorted**. Many hybrid commercial algorithms (like Timsort) switch to Insertion Sort for small sub-arrays.
+* **Complexity**: $O(n^2)$ average, but $O(n)$ best case.
 
-* It provides a speed of O(n logn) but in worst case it is $O(n^2)$ when a bad pivot is chosen. 
-* It has low Spatial Complexity, therefore it is useful in scenarios where memory is limited.
-* Since it works with the original array it tends to have better cache locality.
+---
 
-### Merge Sort
+#### O(n log n) - Efficient Sorts (Divide and Conquer)
 
-The algorithm splits the array in half until each sub-array has one element and them merges them back in order.
+##### Quick Sort
+Uses a **pivot** element to partition the array into two halves: elements smaller than the pivot and elements larger. It then recursively sorts the sub-arrays.
+* **Utility**: Very fast in practice due to low overhead and good **cache locality**.
+* **Worst Case**: $O(n^2)$ if a poor pivot is chosen (e.g., picking the smallest or largest element in an already sorted list).
+* **Space**: $O(\log n)$ due to the recursion stack.
 
-* Provides time complexity of O(n logn) for all cases.
+##### Merge Sort
+Recursively splits the array in half until each sub-array has one element, then merges them back in order.
+* **Utility**: **Stable** (preserves the relative order of equal elements). Highly efficient for Linked Lists.
+* **Space**: $O(n)$ because it requires an auxiliary array to hold the merged elements.
 
-* It is useful when preserving the relative order of equal elements is necessary.
+##### Heap Sort
+Converts the array into a **Max-Heap**, then repeatedly removes the largest element (the root) and places it at the end of the array.
+* **Utility**: Guaranteed $O(n \log n)$ performance regardless of input.
+* **Space**: $O(1)$ (In-place). It is the most memory-efficient of the $O(n \log n)$ algorithms.
 
-* It can work with linked lists since it traverses the array using two pointers, one that points to next and another that moves twice as fast. When the second reaches the end of the list the first one is located at the middle. It is efficient with linked lists since sorting involves re positioning the pointers and not copying or shifting data. Even though it takes O(n) to reach the middle of the linked ist, time complexity is still O(n logn).
+---
 
-* Eg: Sorting by last name where preserving first name is important.
+### Sorting Comparison Table
 
-### Heap Sort
+| Algorithm | Best Time | Average Time | Worst Time | Space | Stable? |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Bubble Sort** | $O(n)$ | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Yes |
+| **Insertion Sort** | $O(n)$ | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Yes |
+| **Quick Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n^2)$ | $O(\log n)$ | No |
+| **Merge Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$ | $O(n)$ | Yes |
+| **Heap Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | No |
 
-Utilizes a Heap (ADD LATER) to find the maximum element in **O(log n)** time.
+---
 
-The root node in a binary tree is grater than its children.
-
-An array is arranged into max-heap, then root of heap is swapped with the last element and heap size is reduced by 1, therefore eventually everything is sorted.
-
-* Runs in O(n logn) in all cases.
-* It can be used in systems where **predictable** execution time is important (quicksort runs slower at worst case). It is attractive for memory constrained environments, since it works over the original array and uses a small fixed number of variables, its **spatial complexity** is O(1), unlike [merge sort](#merge-sort) which requires  an auxiliary array of O(n).
-
+#### Stability in Sorting
+A sorting algorithm is **Stable** if it preserves the original order of elements with equal values. 
+* **Example**: If you sort a list of students by "Last Name" and then by "Class Year," a stable sort ensures students with the same class year remain in alphabetical order by their last name.
 
 
  
